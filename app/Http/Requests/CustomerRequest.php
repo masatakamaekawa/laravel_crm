@@ -26,9 +26,9 @@ class CustomerRequest extends FormRequest
         return [
             'name' => 'required|string|max:50',
             'email' => 'required|string|max:200',
-            'zipcode' => 'required|string|min:1',
+            'zipcode' => 'required|string|min:7',
             'address' => 'required|string|min:1',
-            'tel' => 'required|string|min:1',
+            'tel' => 'required|string|max:11',
         ];
     }
 }
