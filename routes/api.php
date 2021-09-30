@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => ['api']], function(){
-    Route::apiResource('posts', App\Http\Controllers\Api\PostController::class);
-});
+// Route::group(['middleware' => ['api']], function(){
+//     Route::apiResource('posts', App\Http\Controllers\Api\PostController::class);
+// });

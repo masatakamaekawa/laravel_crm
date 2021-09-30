@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\http\Request;
+use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Http\Requests\CustomerRequest;
 use GuzzleHttp\Client;
@@ -27,10 +27,9 @@ class CustomerController extends Controller
      */
     public function create(Request $request)
     {
-        return view('customers.create');
         $method = 'GET';
         $zipcode = $request->zipcode;
-        // QIITA_URLの値を取得してURLを定義
+        // URLの値を取得してURLを定義
         $url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=' . $zipcode;
         // Client(接続する為のクラス)を生成
         $client = new Client();
@@ -40,9 +39,11 @@ class CustomerController extends Controller
             $response = $client->request($method, $url);
             $body = $response->getBody();
             $customer = json_decode($body, false);
-            $address = $customer->results[0]->address1.$customer->results[0]->address2.$customer->results[0]->address3;
+            $address = $customer->results[0]->address1 . $customer->results[0]->address2 . $customer->results[0]->address3;
         } catch (\Throwable $th) {
+            // dd($th);
             $customer = null;
+            $address = null;
         }
         return view('customers.create')->with(compact('zipcode','address'));
     }
